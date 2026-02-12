@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to top, #ffe6f0, #ffffff);
+    font-family: 'Arial', sans-serif;
+}
+
+.contenedor {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+    color: #c2185b;
+    text-align: center;
+}
+
+/* ÁRBOL */
+
+.arbol {
+    position: relative;
+    width: 300px;
+    height: 500px;
+    animation: viento 5s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+/* Tronco + ramas */
+
+.estructura {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 500px;
+}
+
+/* Copa */
+
+.copa {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+}
+
+/* Corazones hoja */
+
+.corazon {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+.corazon::before,
+.corazon::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.corazon::before {
+    top: -9px;
+    left: 0;
+}
+
+.corazon::after {
+    left: -9px;
+    top: 0;
+}
+
+/* Movimiento tipo viento */
+
+@keyframes viento {
+    0% { transform: rotate(-1.5deg); }
+    50% { transform: rotate(1.5deg); }
+    100% { transform: rotate(-1.5deg); }
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Árbol de Amor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="contenedor">
+    <h2>Para el amor de mi vida:</h2>
+
+    <p>
+        Te amo de una manera tan grande como inexplicable.
+        Espero que este sea el primer San Valentín del resto de nuestras vidas.
+    </p>
+
+    <p>
+        No creo que necesites recordar el día que nos conocimos,
+        pero si querés saber cuánto tiempo pasó, te lo dejo acá:
+    </p>
+
+    <h3>Te amo siempre bebi 💖</h3>
+
+    <p class="contador">
+        Ocupás mi mente sin descanso hace: <br>
+        <span id="tiempo"></span>
+    </p>
+
+    <div class="arbol">
+        <svg class="estructura" viewBox="0 0 300 500">
+
+            <!-- Tronco principal -->
+            <path d="M150 500 
+                     C 130 420, 170 350,
+                       140 280
+                     C 110 220, 170 180,
+                       150 100"
+                  stroke="#6d4c41"
+                  stroke-width="20"
+                  fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Ramas -->
+            <path d="M145 260 C 100 220, 90 190, 80 150"
+                  stroke="#6d4c41"
+                  stroke-width="12"
+                  fill="none"
+                  stroke-linecap="round"/>
+
+            <path d="M155 240 C 200 210, 210 180, 220 140"
+                  stroke="#6d4c41"
+                  stroke-width="12"
+                  fill="none"
+                  stroke-linecap="round"/>
+
+            <path d="M150 150 C 120 130, 110 110, 100 90"
+                  stroke="#6d4c41"
+                  stroke-width="10"
+                  fill="none"
+                  stroke-linecap="round"/>
+
+            <path d="M150 140 C 180 120, 190 100, 200 80"
+                  stroke="#6d4c41"
+                  stroke-width="10"
+                  fill="none"
+                  stroke-linecap="round"/>
+
+        </svg>
+
+        <div class="copa" id="copa"></div>
+    </div>
+</div>
+
+<script>
+/* 🌳 GENERAR HOJAS */
+
+function crearHoja() {
+    const hoja = document.createElement("div");
+    hoja.classList.add("corazon");
+
+    const colores = ["#ff4d6d", "#ff758f", "#ff8fa3", "#ff1744", "#ff6f91"];
+    hoja.style.background = colores[Math.floor(Math.random() * colores.length)];
+
+    const radio = 150 * Math.sqrt(Math.random());
+    const angulo = Math.random() * 2 * Math.PI;
+
+    const x = 150 + radio * Math.cos(angulo);
+    const y = 150 + radio * Math.sin(angulo);
+
+    hoja.style.left = x + "px";
+    hoja.style.top = y + "px";
+
+    const escala = Math.random() * 0.7 + 0.5;
+    hoja.style.transform = `scale(${escala}) rotate(45deg)`;
+
+    document.getElementById("copa").appendChild(hoja);
+}
+
+for (let i = 0; i < 220; i++) {
+    crearHoja();
+}
+
+/* ⏳ CONTADOR EN TIEMPO REAL */
+
+const fechaInicio = new Date("{{ fecha_inicio }}");
+
+function actualizarContador() {
+    const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+    const segundos = Math.floor((diferencia / 1000) % 60);
+
+    document.getElementById("tiempo").innerHTML =
+        `${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos`;
+}
+
+setInterval(actualizarContador, 1000);
+actualizarContador();
+</script>
+
+</body>
+</html>
